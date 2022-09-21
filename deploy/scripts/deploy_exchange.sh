@@ -1,6 +1,28 @@
 #!/usr/bin/env bash
 
-source .env.local
+LOCAL=.env.local
+TESTNET=.env.testnet
+MAINNET=.env
+
+if [ -z $1 ]
+then
+  echo "usage: deploy_exchange.sh [local || testnet || mainnet]"
+  exit 1
+elif [ $1 == "local" ]
+then
+  ENV=$LOCAL
+elif [ $1 == "testnet" ]
+then
+  ENV=$TESTNET
+elif [$1 == "mainnet" ]
+then
+  ENV=$MAINNET
+else
+  echo "usage: deploy_exchange.sh [local || testnet || mainnet]"
+  exit 1
+fi
+
+source $ENV
 
 echo "Deploying CTF Exchange..."
 

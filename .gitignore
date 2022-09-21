@@ -10,6 +10,8 @@ buffer
 
 .env
 .env.local
+.env.testnet
+.env.mainnet
 
 !/broadcast
 /broadcast/*/31337/
