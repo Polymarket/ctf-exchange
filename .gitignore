@@ -1,11 +1,16 @@
-# Compiler files
 cache/
 out/
+node_modules/
+env/
+tmp/
+broadcast/
 
-# Ignores development broadcast logs
+buffer
+.DS_Store
+
+.env
+.env.local
+
 !/broadcast
 /broadcast/*/31337/
 /broadcast/**/dry-run/
-
-# Dotenv file
-.env

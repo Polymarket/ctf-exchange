@@ -1,5 +1,5 @@
 {
-    "name": "Polymarket Protocol",
+    "name": "polymarket-ctf-exchange",
     "scripts": {
         "test": "forge test"
     },

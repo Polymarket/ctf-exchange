@@ -1,3 +1,33 @@
+[submodule "lib/uniswap-v3-core"]
+	path = lib/uniswap-v3-core
+	url = https://github.com/Uniswap/v3-core
+[submodule "lib/uniswap-v3-periphery"]
+	path = lib/uniswap-v3-periphery
+	url = https://github.com/Uniswap/v3-periphery
 [submodule "lib/forge-std"]
 	path = lib/forge-std
-	url = https://github.com/foundry-rs/forge-std
+	url = https://github.com/brockelmore/forge-std
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "lib/solmate"]
+	path = lib/solmate
+	url = https://github.com/Rari-Capital/solmate
+[submodule "lib/compound-protocol"]
+	path = lib/compound-protocol
+	url = https://github.com/compound-finance/compound-protocol
+[submodule "lib/conditional-tokens-contracts"]
+	path = lib/conditional-tokens-contracts
+	url = https://github.com/gnosis/conditional-tokens-contracts
+[submodule "lib/conditional-tokens-market-makers"]
+	path = lib/conditional-tokens-market-makers
+	url = https://github.com/gnosis/conditional-tokens-market-makers
+[submodule "lib/uniswap-v3-staker"]
+	path = lib/uniswap-v3-staker
+	url = https://github.com/Uniswap/v3-staker
+[submodule "lib/fx-portal"]
+	path = lib/fx-portal
+	url = https://github.com/fx-portal/contracts
+[submodule "lib/solenv"]
+	path = lib/solenv
+	url = https://github.com/memester-xyz/solenv
