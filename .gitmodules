@@ -12,7 +12,7 @@
 	url = https://github.com/openzeppelin/openzeppelin-contracts
 [submodule "lib/solmate"]
 	path = lib/solmate
-	url = https://github.com/Rari-Capital/solmate
+	url = https://github.com/transmissions11/solmate
 [submodule "lib/compound-protocol"]
 	path = lib/compound-protocol
 	url = https://github.com/compound-finance/compound-protocol
