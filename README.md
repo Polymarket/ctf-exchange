@@ -1,68 +1,7 @@
-# polymarket-protocol
+# ctf-exchange
 
-Polymarket protocol smart contracts.
+Moved from Polymarket protocol.
 
----
-
-## Contracts
-
-[Contract Documentation](docs/Main.md)
-
-### `markets`
-
-Core market contracts.
-
-- factory
-- market
-- ptoken
-
----
-
-### `market-ctf`
-
-Gnosis Conditional Tokens Framework (CTF) extension market.
-Allows the creation of a pMarket which will settle using the result of a particular CTF market. CTF conditional tokens may be exchanged for the corrsponding pToken.
-
----
-
-### `market-periphery`
-
-Contracts to help
-
-1. Create markets
-2. Trade pTokens in UniswapV3 pools
-3. Call primary market functions from an EOA
-4. Add liquidity to UniswapV3 pools
-
----
-
-### `oracle`
-
-Polymarket's oracle contract, serving as the resolution source for most pMarkets.
-
----
-
-### `gov`
-
-Polymarket governance contracts
-
-- `POLY` token
-- Polymarket GovernorBravo fork
-- Polygon bridge
-
----
-
-### `exchange`
-
-Polymarket CTF Exchange contracts.
-
----
-
-### `dev`
-
-Helper contracts for testing, deployment, and general interactions.
-
----
 
 ## Set-up
 
@@ -94,23 +33,3 @@ To install new foundry submodules: `forge install UserName/RepoName@CommitHash`
 
 To remove: `forge remove UserName/RepoName`
 
----
-
-## Gotchas
-
-UniswapV3Pool will revert without error message if you try add liquidity to an arbitrary range. E.g. if the fee tier is 500, liquidity can only be added to ranges with both tickUpper and tickLower multiples of 10.
-
----
-
-## Tricks
-
-The bash utility `bc` can be helpful for dealing with uints.
-To display an X96 uint: `bc -l <<< $NUMBER/2^96`
-To square a sqrtPriceX96: `bc -l <<< ($SQRT_PRICE/2^96)^2`
-You can also echo and pipe these: `echo $NUMBER/2^96 | bc -l`
-
-```[bash]
-cast keccak 'hevm cheat code' | grep -o '.\{40\}$'
-```
-
----
