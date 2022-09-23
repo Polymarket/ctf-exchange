@@ -105,7 +105,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         // NOTE: Fees are "collected" by the Operator implicitly,
         // since the fee is deducted from the assets paid by the Operator
 
-        emit OrderFilled(orderHash, msg.sender, makerAssetId, takerAssetId, making, remaining, fee);
+        emit OrderFilled(orderHash, order.maker, msg.sender, makerAssetId, takerAssetId, making, remaining, fee);
     }
 
     /// @notice Fills a set of orders against the caller
@@ -159,9 +159,9 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         // Charge the fee to taker order maker, explicitly transferring the fee from the Exchange to the Operator
         _chargeFee(address(this), msg.sender, takerAssetId, fee);
 
-        emit OrderFilled(orderHash, address(this), makerAssetId, takerAssetId, making, remaining, fee);
+        emit OrderFilled(orderHash, takerOrder.maker, address(this), makerAssetId, takerAssetId, making, remaining, fee);
 
-        emit OrdersMatched(orderHash, makerAssetId, takerAssetId, making, taking);
+        emit OrdersMatched(orderHash, takerOrder.maker, makerAssetId, takerAssetId, making, taking);
 
         // Refund any leftover tokens pulled from the taker to the taker order
         uint256 refund = _getBalance(makerAssetId);
@@ -206,7 +206,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
 
         _fillFacingExchange(making, taking, makerOrder.maker, makerAssetId, takerAssetId, matchType, fee);
 
-        emit OrderFilled(orderHash, takerOrder.maker, makerAssetId, takerAssetId, making, remaining, fee);
+        emit OrderFilled(orderHash, makerOrder.maker, takerOrder.maker, makerAssetId, takerAssetId, making, remaining, fee);
     }
 
     /// @notice Performs common order computations and validation

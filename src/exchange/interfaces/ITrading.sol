@@ -20,7 +20,8 @@ interface ITradingEE {
     /// @notice Emitted when an order is filled
     event OrderFilled(
         bytes32 indexed orderHash,
-        address indexed filler,
+        address indexed maker,
+        address indexed taker,
         uint256 makerAssetId,
         uint256 takerAssetId,
         uint256 filled,
@@ -31,8 +32,9 @@ interface ITradingEE {
     /// @notice Emitted when a set of orders is matched
     event OrdersMatched(
         bytes32 indexed takerOrderHash,
-        uint256 indexed makerAssetId,
-        uint256 indexed takerAssetId,
+        address indexed takerOrderMaker,
+        uint256 makerAssetId,
+        uint256 takerAssetId,
         uint256 makerAmountFilled,
         uint256 takerAmountFilled
     );

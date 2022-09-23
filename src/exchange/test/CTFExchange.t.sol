@@ -91,7 +91,7 @@ contract CTFExchangeTest is BaseExchangeTest {
         // Order can be filled after unpausing
         vm.prank(carla);
         exchange.fillOrder(order, 50_000_000);
-        emit OrderFilled(exchange.hashOrder(order), carla, 0, yes, 50_000_000, 0, 0);
+        emit OrderFilled(exchange.hashOrder(order), bob, carla, 0, yes, 50_000_000, 0, 0);
     }
 
     function testRegisterToken(uint256 _token0, uint256 _token1, uint256 _conditionId) public {
@@ -217,7 +217,7 @@ contract CTFExchangeTest is BaseExchangeTest {
         bytes32 orderHash = exchange.hashOrder(order);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(orderHash, carla, 0, yes, 25_000_000, 25_000_000, 0);
+        emit OrderFilled(orderHash, bob, carla, 0, yes, 25_000_000, 25_000_000, 0);
 
         // Checkpoint USDC balance for carla and Outcome token balance for bob
         checkpointCollateral(carla);
@@ -275,7 +275,7 @@ contract CTFExchangeTest is BaseExchangeTest {
         uint256 expectedFee = calculateFee(100, 50_000_000, order.makerAmount, order.takerAmount, order.side);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(orderHash, carla, 0, yes, 25_000_000, 25_000_000, expectedFee);
+        emit OrderFilled(orderHash, bob, carla, 0, yes, 25_000_000, 25_000_000, expectedFee);
 
         vm.prank(carla);
         exchange.fillOrder(order, 25_000_000);
@@ -303,7 +303,7 @@ contract CTFExchangeTest is BaseExchangeTest {
         uint256 expectedFee = calculateFee(feeRateBps, taking, order.makerAmount, order.takerAmount, order.side);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(orderHash, carla, 0, yes, fillAmount, remaining, expectedFee);
+        emit OrderFilled(orderHash, bob, carla, 0, yes, fillAmount, remaining, expectedFee);
 
         checkpointCTF(bob, yes);
         checkpointCollateral(carla);
@@ -337,7 +337,7 @@ contract CTFExchangeTest is BaseExchangeTest {
 
         // The taker specified operator will successfully fill the order
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(order), carla, 0, yes, 50_000_000, 0, 0);
+        emit OrderFilled(exchange.hashOrder(order), bob, carla, 0, yes, 50_000_000, 0, 0);
 
         vm.prank(carla);
         exchange.fillOrder(order, 50_000_000);
@@ -391,13 +391,13 @@ contract CTFExchangeTest is BaseExchangeTest {
             calculateFee(100, 100_000_000, yesSell.makerAmount, yesSell.takerAmount, yesSell.side);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(yesBuy), carla, 0, yes, 50_000_000, 0, expectedFeeYesBuy);
+        emit OrderFilled(exchange.hashOrder(yesBuy), bob, carla, 0, yes, 50_000_000, 0, expectedFeeYesBuy);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(noBuy), carla, 0, no, 50_000_000, 0, expectedFeeNoBuy);
+        emit OrderFilled(exchange.hashOrder(noBuy), bob, carla, 0, no, 50_000_000, 0, expectedFeeNoBuy);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(yesSell), carla, yes, 0, 100_000_000, 0, expectedFeeYesSell);
+        emit OrderFilled(exchange.hashOrder(yesSell), bob, carla, yes, 0, 100_000_000, 0, expectedFeeYesSell);
 
         vm.prank(carla);
         exchange.fillOrders(orders, amounts);
@@ -431,7 +431,7 @@ contract CTFExchangeTest is BaseExchangeTest {
         emit TransferSingle(address(exchange), carla, bob, yes, 0);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(order), carla, 0, yes, 50_000_000, 0, 0);
+        emit OrderFilled(exchange.hashOrder(order), bob, carla, 0, yes, 50_000_000, 0, 0);
 
         uint256 fillAmount = 50_000_000;
         vm.prank(carla);

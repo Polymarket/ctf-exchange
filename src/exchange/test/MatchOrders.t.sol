@@ -31,18 +31,18 @@ contract MatchOrdersTest is BaseExchangeTest {
         // Check fill events
         // First maker order is filled completely
         vm.expectEmit(true, true, true, false);
-        emit OrderFilled(exchange.hashOrder(sellA), bob, yes, 0, 50_000_000, 0, 0);
+        emit OrderFilled(exchange.hashOrder(sellA), carla, bob, yes, 0, 50_000_000, 0, 0);
 
         // Second maker order is partially filled
         vm.expectEmit(true, true, true, false);
-        emit OrderFilled(exchange.hashOrder(sellB), bob, yes, 0, 70_000_000, 30_000_000, 0);
+        emit OrderFilled(exchange.hashOrder(sellB), carla, bob, yes, 0, 70_000_000, 30_000_000, 0);
 
         // The taker order is filled completely
         vm.expectEmit(true, true, true, false);
-        emit OrderFilled(exchange.hashOrder(buy), address(exchange), 0, yes, 60_000_000, 0, 0);
+        emit OrderFilled(exchange.hashOrder(buy), bob, address(exchange), 0, yes, 60_000_000, 0, 0);
 
         vm.expectEmit(true, true, true, false);
-        emit OrdersMatched(exchange.hashOrder(buy), 0, yes, 60_000_000, 120_000_000);
+        emit OrdersMatched(exchange.hashOrder(buy), bob, 0, yes, 60_000_000, 120_000_000);
 
         vm.prank(admin);
         exchange.matchOrders(buy, makerOrders, 60_000_000, fillAmounts);
@@ -355,7 +355,7 @@ contract MatchOrdersTest is BaseExchangeTest {
         }
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(sell), bob, yes, 0, 50_000_000, 50_000_000, expectedMakerFee);
+        emit OrderFilled(exchange.hashOrder(sell), carla, bob, yes, 0, 50_000_000, 50_000_000, expectedMakerFee);
 
         if (expectedMakerFee > 0) {
             vm.expectEmit(true, true, true, false);
@@ -363,7 +363,7 @@ contract MatchOrdersTest is BaseExchangeTest {
         }
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(buy), address(exchange), 0, yes, 25_000_000, 25_000_000, expectedTakerFee);
+        emit OrderFilled(exchange.hashOrder(buy), bob, address(exchange), 0, yes, 25_000_000, 25_000_000, expectedTakerFee);
 
         // Match the orders
         exchange.matchOrders(buy, makerOrders, takerFillAmount, fillAmounts);
@@ -402,7 +402,7 @@ contract MatchOrdersTest is BaseExchangeTest {
             calculateFee(makerFeeRate, takerFillAmount, buy.makerAmount, buy.takerAmount, buy.side);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(buy), bob, 0, yes, 60_000_000, 0, expectedMakerFee);
+        emit OrderFilled(exchange.hashOrder(buy), carla, bob, 0, yes, 60_000_000, 0, expectedMakerFee);
 
         if (expectedTakerFee > 0) {
             vm.expectEmit(true, true, true, true);
@@ -410,10 +410,10 @@ contract MatchOrdersTest is BaseExchangeTest {
         }
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(sell), address(exchange), yes, 0, 100_000_000, 0, expectedTakerFee);
+        emit OrderFilled(exchange.hashOrder(sell), bob, address(exchange), yes, 0, 100_000_000, 0, expectedTakerFee);
 
         vm.expectEmit(true, true, true, true);
-        emit OrdersMatched(exchange.hashOrder(sell), yes, 0, 100_000_000, 60_000_000);
+        emit OrdersMatched(exchange.hashOrder(sell), bob, yes, 0, 100_000_000, 60_000_000);
 
         // Match the orders
         exchange.matchOrders(sell, makerOrders, takerFillAmount, fillAmounts);
@@ -460,13 +460,13 @@ contract MatchOrdersTest is BaseExchangeTest {
         emit FeeCharged(admin, no, expectedMakerFee);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(noBuy), bob, 0, no, 50_000_000, 0, expectedMakerFee);
+        emit OrderFilled(exchange.hashOrder(noBuy), carla, bob, 0, no, 50_000_000, 0, expectedMakerFee);
 
         vm.expectEmit(true, true, true, true);
         emit FeeCharged(admin, yes, expectedTakerFee);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(buy), address(exchange), 0, yes, 50_000_000, 0, expectedTakerFee);
+        emit OrderFilled(exchange.hashOrder(buy), bob, address(exchange), 0, yes, 50_000_000, 0, expectedTakerFee);
 
         // Match the orders
         exchange.matchOrders(buy, makerOrders, takerFillAmount, fillAmounts);
@@ -517,13 +517,13 @@ contract MatchOrdersTest is BaseExchangeTest {
         emit FeeCharged(admin, 0, expectedMakerFee);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(noSell), bob, no, 0, 100_000_000, 0, expectedMakerFee);
+        emit OrderFilled(exchange.hashOrder(noSell), carla, bob, no, 0, 100_000_000, 0, expectedMakerFee);
 
         vm.expectEmit(true, true, true, true);
         emit FeeCharged(admin, 0, expectedTakerFee);
 
         vm.expectEmit(true, true, true, true);
-        emit OrderFilled(exchange.hashOrder(yesSell), address(exchange), yes, 0, 100_000_000, 0, expectedTakerFee);
+        emit OrderFilled(exchange.hashOrder(yesSell), bob, address(exchange), yes, 0, 100_000_000, 0, expectedTakerFee);
 
         // Match the orders
         exchange.matchOrders(yesSell, makerOrders, takerFillAmount, fillAmounts);
@@ -637,7 +637,7 @@ contract MatchOrdersTest is BaseExchangeTest {
 
         // Matching with carla suceeds as expected
         vm.expectEmit(true, true, true, true);
-        emit OrdersMatched(exchange.hashOrder(buy), 0, yes, 50_000_000, 100_000_000);
+        emit OrdersMatched(exchange.hashOrder(buy), bob, 0, yes, 50_000_000, 100_000_000);
         vm.prank(carla);
         exchange.matchOrders(buy, makerOrders, takerOrderFillAmount, fillAmounts);
     }
@@ -659,7 +659,7 @@ contract MatchOrdersTest is BaseExchangeTest {
         uint256 takerOrderFillAmount = 50_000_000;
 
         vm.expectEmit(true, true, true, true);
-        emit OrdersMatched(exchange.hashOrder(buy), 0, yes, 50_000_000, 1);
+        emit OrdersMatched(exchange.hashOrder(buy), bob, 0, yes, 50_000_000, 1);
 
         // The orders are successfully matched
         vm.prank(admin);
