@@ -14,7 +14,7 @@ then
 elif [ $1 == "testnet" ]
 then
   ENV=$TESTNET
-elif [$1 == "mainnet" ]
+elif [ $1 == "mainnet" ]
 then
   ENV=$MAINNET
 else
@@ -39,6 +39,7 @@ OUTPUT="$(forge script ExchangeDeployment \
     --rpc-url $RPC_URL \
     --json \
     --broadcast \
+    --with-gas-price 200000000000 \
     -s "deployExchange(address,address,address,address,address)" $ADMIN $COLLATERAL $CTF $PROXY_FACTORY $SAFE_FACTORY)"
 
 EXCHANGE=$(echo "$OUTPUT" | grep "{" | jq -r .returns.exchange.value)
