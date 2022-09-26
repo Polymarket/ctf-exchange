@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {Order, Side} from "../libraries/OrderStructs.sol";
+import { Order, Side } from "../libraries/OrderStructs.sol";
 
 library CalculatorHelper {
     uint256 internal constant ONE = 10 ** 18;
@@ -56,16 +56,12 @@ library CalculatorHelper {
     }
 
     function _calculatePrice(uint256 makerAmount, uint256 takerAmount, Side side) internal pure returns (uint256) {
-        if (side == Side.BUY) {
-            return takerAmount != 0 ? makerAmount * ONE / takerAmount : 0;
-        }
+        if (side == Side.BUY) return takerAmount != 0 ? makerAmount * ONE / takerAmount : 0;
         return makerAmount != 0 ? takerAmount * ONE / makerAmount : 0;
     }
 
     function isCrossing(Order memory a, Order memory b) internal pure returns (bool) {
-        if (a.takerAmount == 0 || b.takerAmount == 0) {
-            return true;
-        }
+        if (a.takerAmount == 0 || b.takerAmount == 0) return true;
 
         return _isCrossing(calculatePrice(a), calculatePrice(b), a.side, b.side);
     }

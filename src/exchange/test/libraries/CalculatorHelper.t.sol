@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {Test} from "forge-std/Test.sol";
+import { Test } from "forge-std/Test.sol";
 
-import {CalculatorHelper} from "exchange/libraries/CalculatorHelper.sol";
-import {Side} from "exchange/libraries/OrderStructs.sol";
+import { CalculatorHelper } from "exchange/libraries/CalculatorHelper.sol";
+import { Side } from "exchange/libraries/OrderStructs.sol";
 
 contract CalculatorHelperTest is Test {
     function testFuzzCalculateTakingAmount(uint64 making, uint128 makerAmount, uint128 takerAmount) public {

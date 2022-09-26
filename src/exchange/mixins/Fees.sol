@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {IFees} from "../interfaces/IFees.sol";
+import { IFees } from "../interfaces/IFees.sol";
 
 abstract contract Fees is IFees {
     /// @notice Maximum fee rate that can be signed into an Order

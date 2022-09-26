@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {IERC20} from "openzeppelin-contracts/token/ERC20/IERC20.sol";
+import { IERC20 } from "openzeppelin-contracts/token/ERC20/IERC20.sol";
 
-import {IAssets} from "../interfaces/IAssets.sol";
+import { IAssets } from "../interfaces/IAssets.sol";
 
 abstract contract Assets is IAssets {
     address internal immutable collateral;

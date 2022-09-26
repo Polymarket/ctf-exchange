@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-import {Script} from "forge-std/Script.sol";
-import {CTFExchange} from "exchange/CTFExchange.sol";
+import { Script } from "forge-std/Script.sol";
+import { CTFExchange } from "exchange/CTFExchange.sol";
 
 /// @title ExchangeDeployment
 /// @notice Script to deploy the CTF Exchange

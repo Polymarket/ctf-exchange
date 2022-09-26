@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {OrderStatus, Order} from "../libraries/OrderStructs.sol";
+import { OrderStatus, Order } from "../libraries/OrderStructs.sol";
 
 interface ITradingEE {
     error NotOwner();
@@ -24,8 +24,8 @@ interface ITradingEE {
         address indexed taker,
         uint256 makerAssetId,
         uint256 takerAssetId,
-        uint256 filled,
-        uint256 remaining,
+        uint256 makerAmountFilled,
+        uint256 takerAmountFilled,
         uint256 fee
     );
 
@@ -40,4 +40,4 @@ interface ITradingEE {
     );
 }
 
-interface ITrading is ITradingEE {}
+interface ITrading is ITradingEE { }

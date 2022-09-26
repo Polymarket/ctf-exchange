@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {IPausable} from "../interfaces/IPausable.sol";
+import { IPausable } from "../interfaces/IPausable.sol";
 
 abstract contract Pausable is IPausable {
     bool public paused = false;

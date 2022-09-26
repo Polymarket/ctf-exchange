@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {IAuth} from "../interfaces/IAuth.sol";
+import { IAuth } from "../interfaces/IAuth.sol";
 
 /// @title Auth
 /// @notice Provides admin and operator roles and access control modifiers

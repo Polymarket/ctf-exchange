@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {IERC1155} from "openzeppelin-contracts/token/ERC1155/IERC1155.sol";
+import { IERC1155 } from "openzeppelin-contracts/token/ERC1155/IERC1155.sol";
 
-import {SafeTransferLib, ERC20} from "common/libraries/SafeTransferLib.sol";
+import { SafeTransferLib, ERC20 } from "common/libraries/SafeTransferLib.sol";
 
 /// @title TransferHelper
 /// @notice Helper method to transfer tokens

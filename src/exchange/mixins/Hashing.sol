@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {EIP712} from "openzeppelin-contracts/utils/cryptography/draft-EIP712.sol";
+import { EIP712 } from "openzeppelin-contracts/utils/cryptography/draft-EIP712.sol";
 
-import {IHashing} from "../interfaces/IHashing.sol";
+import { IHashing } from "../interfaces/IHashing.sol";
 
-import {Order, ORDER_TYPEHASH} from "../libraries/OrderStructs.sol";
+import { Order, ORDER_TYPEHASH } from "../libraries/OrderStructs.sol";
 
 abstract contract Hashing is EIP712, IHashing {
     bytes32 public immutable domainSeparator;

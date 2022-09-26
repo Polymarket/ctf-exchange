@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {IFees} from "../interfaces/IFees.sol";
-import {IHashing} from "../interfaces/IHashing.sol";
-import {ITrading} from "../interfaces/ITrading.sol";
-import {IRegistry} from "../interfaces/IRegistry.sol";
-import {ISignatures} from "../interfaces/ISignatures.sol";
-import {INonceManager} from "../interfaces/INonceManager.sol";
-import {IAssetOperations} from "../interfaces/IAssetOperations.sol";
+import { IFees } from "../interfaces/IFees.sol";
+import { IHashing } from "../interfaces/IHashing.sol";
+import { ITrading } from "../interfaces/ITrading.sol";
+import { IRegistry } from "../interfaces/IRegistry.sol";
+import { ISignatures } from "../interfaces/ISignatures.sol";
+import { INonceManager } from "../interfaces/INonceManager.sol";
+import { IAssetOperations } from "../interfaces/IAssetOperations.sol";
 
-import {CalculatorHelper} from "../libraries/CalculatorHelper.sol";
-import {Order, Side, MatchType, OrderStatus} from "../libraries/OrderStructs.sol";
+import { CalculatorHelper } from "../libraries/CalculatorHelper.sol";
+import { Order, Side, MatchType, OrderStatus } from "../libraries/OrderStructs.sol";
 
 /// @title Trading
 /// @notice Implements logic for trading CTF assets
@@ -21,7 +21,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
     /// @notice Gets the status of an order
     /// @param orderHash    - The hash of the order
     function getOrderStatus(bytes32 orderHash) public view returns (OrderStatus memory) {
-        return orderStatus[orderHash];
+        return orderStatus[ orderHash];
     }
 
     /// @notice Validates an order
@@ -44,7 +44,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         uint256 length = orders.length;
         uint256 i = 0;
         for (; i < length;) {
-            _cancelOrder(orders[i]);
+            _cancelOrder(orders[ i]);
             unchecked {
                 ++i;
             }
@@ -88,7 +88,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
     /// @param to           - The address to receive assets from filling the order
     function _fillOrder(Order memory order, uint256 fillAmount, address to) internal {
         uint256 making = fillAmount;
-        (uint256 taking, uint256 remaining, bytes32 orderHash) = _performOrderChecks(order, making);
+        (uint256 taking, bytes32 orderHash) = _performOrderChecks(order, making);
 
         uint256 fee = CalculatorHelper.calculateFee(
             order.feeRateBps, order.side == Side.BUY ? taking : making, order.makerAmount, order.takerAmount, order.side
@@ -105,7 +105,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         // NOTE: Fees are "collected" by the Operator implicitly,
         // since the fee is deducted from the assets paid by the Operator
 
-        emit OrderFilled(orderHash, order.maker, msg.sender, makerAssetId, takerAssetId, making, remaining, fee);
+        emit OrderFilled(orderHash, order.maker, msg.sender, makerAssetId, takerAssetId, making, taking, fee);
     }
 
     /// @notice Fills a set of orders against the caller
@@ -137,7 +137,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
     ) internal {
         uint256 making = takerFillAmount;
 
-        (uint256 taking, uint256 remaining, bytes32 orderHash) = _performOrderChecks(takerOrder, making);
+        (uint256 taking, bytes32 orderHash) = _performOrderChecks(takerOrder, making);
         (uint256 makerAssetId, uint256 takerAssetId) = _deriveAssetIds(takerOrder);
 
         // Transfer takerOrder making amount from taker order to the Exchange
@@ -159,15 +159,17 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         // Charge the fee to taker order maker, explicitly transferring the fee from the Exchange to the Operator
         _chargeFee(address(this), msg.sender, takerAssetId, fee);
 
-        emit OrderFilled(orderHash, takerOrder.maker, address(this), makerAssetId, takerAssetId, making, remaining, fee);
+        // Refund any leftover tokens pulled from the taker to the taker order
+        uint256 refund = _getBalance(makerAssetId);
+        if (refund > 0) _transfer(address(this), takerOrder.maker, makerAssetId, refund);
+
+        emit OrderFilled(
+            orderHash, takerOrder.maker, address(this), makerAssetId, takerAssetId, making, taking, fee
+        );
 
         emit OrdersMatched(orderHash, takerOrder.maker, makerAssetId, takerAssetId, making, taking);
 
-        // Refund any leftover tokens pulled from the taker to the taker order
-        uint256 refund = _getBalance(makerAssetId);
-        if (refund > 0) {
-            _transfer(address(this), takerOrder.maker, makerAssetId, refund);
-        }
+        
     }
 
     function _fillMakerOrders(Order memory takerOrder, Order[] memory makerOrders, uint256[] memory makerFillAmounts)
@@ -194,7 +196,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         _validateTakerAndMaker(takerOrder, makerOrder, matchType);
 
         uint256 making = fillAmount;
-        (uint256 taking, uint256 remaining, bytes32 orderHash) = _performOrderChecks(makerOrder, making);
+        (uint256 taking, bytes32 orderHash) = _performOrderChecks(makerOrder, making);
         uint256 fee = CalculatorHelper.calculateFee(
             makerOrder.feeRateBps,
             makerOrder.side == Side.BUY ? taking : making,
@@ -206,7 +208,9 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
 
         _fillFacingExchange(making, taking, makerOrder.maker, makerAssetId, takerAssetId, matchType, fee);
 
-        emit OrderFilled(orderHash, makerOrder.maker, takerOrder.maker, makerAssetId, takerAssetId, making, remaining, fee);
+        emit OrderFilled(
+            orderHash, makerOrder.maker, takerOrder.maker, makerAssetId, takerAssetId, making, taking, fee
+        );
     }
 
     /// @notice Performs common order computations and validation
@@ -219,7 +223,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
     /// @param making   - The amount of the order being filled, in terms of maker amount
     function _performOrderChecks(Order memory order, uint256 making)
         internal
-        returns (uint256 takingAmount, uint256 remainingAmount, bytes32 orderHash)
+        returns (uint256 takingAmount, bytes32 orderHash)
     {
         _validateTaker(order.taker);
 
@@ -232,7 +236,7 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
         takingAmount = CalculatorHelper.calculateTakingAmount(making, order.makerAmount, order.takerAmount);
 
         // Update the order status in storage
-        remainingAmount = _updateOrderStatus(orderHash, order, making);
+        _updateOrderStatus(orderHash, order, making);
     }
 
     /// @notice Fills a maker order using the Exchange as the counterparty
@@ -269,19 +273,13 @@ abstract contract Trading is IFees, ITrading, IHashing, IRegistry, ISignatures, 
     }
 
     function _deriveMatchType(Order memory takerOrder, Order memory makerOrder) internal pure returns (MatchType) {
-        if (takerOrder.side == Side.BUY && makerOrder.side == Side.BUY) {
-            return MatchType.MINT;
-        }
-        if (takerOrder.side == Side.SELL && makerOrder.side == Side.SELL) {
-            return MatchType.MERGE;
-        }
+        if (takerOrder.side == Side.BUY && makerOrder.side == Side.BUY) return MatchType.MINT;
+        if (takerOrder.side == Side.SELL && makerOrder.side == Side.SELL) return MatchType.MERGE;
         return MatchType.COMPLEMENTARY;
     }
 
     function _deriveAssetIds(Order memory order) internal pure returns (uint256 makerAssetId, uint256 takerAssetId) {
-        if (order.side == Side.BUY) {
-            return (0, order.tokenId);
-        }
+        if (order.side == Side.BUY) return (0, order.tokenId);
         return (order.tokenId, 0);
     }
 

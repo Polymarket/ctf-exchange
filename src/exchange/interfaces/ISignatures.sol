@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import {Order} from "../libraries/OrderStructs.sol";
+import { Order } from "../libraries/OrderStructs.sol";
 
 interface ISignaturesEE {
     error InvalidSignature();

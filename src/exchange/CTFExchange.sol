@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import {Auth} from "./mixins/Auth.sol";
-import {Fees} from "./mixins/Fees.sol";
-import {Assets} from "./mixins/Assets.sol";
-import {Hashing} from "./mixins/Hashing.sol";
-import {Trading} from "./mixins/Trading.sol";
-import {Registry} from "./mixins/Registry.sol";
-import {Pausable} from "./mixins/Pausable.sol";
-import {Signatures} from "./mixins/Signatures.sol";
-import {NonceManager} from "./mixins/NonceManager.sol";
-import {AssetOperations} from "./mixins/AssetOperations.sol";
+import { Auth } from "./mixins/Auth.sol";
+import { Fees } from "./mixins/Fees.sol";
+import { Assets } from "./mixins/Assets.sol";
+import { Hashing } from "./mixins/Hashing.sol";
+import { Trading } from "./mixins/Trading.sol";
+import { Registry } from "./mixins/Registry.sol";
+import { Pausable } from "./mixins/Pausable.sol";
+import { Signatures } from "./mixins/Signatures.sol";
+import { NonceManager } from "./mixins/NonceManager.sol";
+import { AssetOperations } from "./mixins/AssetOperations.sol";
 
-import {BaseExchange} from "./BaseExchange.sol";
+import { BaseExchange } from "./BaseExchange.sol";
 
-import {Order} from "./libraries/OrderStructs.sol";
+import { Order } from "./libraries/OrderStructs.sol";
 
 /// @title CTF Exchange
 /// @notice Implements logic for trading CTF assets
@@ -35,7 +35,7 @@ contract CTFExchange is
     constructor(address _collateral, address _ctf, address _proxyFactory, address _safeFactory)
         Assets(_collateral, _ctf)
         Signatures(_proxyFactory, _safeFactory)
-    {}
+    { }
 
     /*//////////////////////////////////////////////////////////////
                         PAUSE

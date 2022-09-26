@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-import {IERC1271} from "openzeppelin-contracts/interfaces/IERC1271.sol";
-import {ECDSA} from "openzeppelin-contracts/utils/cryptography/ECDSA.sol";
+import { IERC1271 } from "openzeppelin-contracts/interfaces/IERC1271.sol";
+import { ECDSA } from "openzeppelin-contracts/utils/cryptography/ECDSA.sol";
 
-import {SignatureType, Order} from "../libraries/OrderStructs.sol";
+import { SignatureType, Order } from "../libraries/OrderStructs.sol";
 
-import {ISignatures} from "../interfaces/ISignatures.sol";
+import { ISignatures } from "../interfaces/ISignatures.sol";
 
-import {PolyFactoryHelper} from "./PolyFactoryHelper.sol";
+import { PolyFactoryHelper } from "./PolyFactoryHelper.sol";
 
 /// @title Signatures
 /// @notice Maintains logic that defines the various signature types and validates them
 abstract contract Signatures is ISignatures, PolyFactoryHelper {
-    constructor(address _proxyFactory, address _safeFactory) PolyFactoryHelper(_proxyFactory, _safeFactory) {}
+    constructor(address _proxyFactory, address _safeFactory) PolyFactoryHelper(_proxyFactory, _safeFactory) { }
 
     /// @notice Validates the signature of an order
     /// @param orderHash - The hash of the order
