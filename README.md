@@ -2,6 +2,11 @@
 
 Moved from Polymarket protocol.
 
+Deployment
+| Network          | Address                                                                           |
+| ---------------- | --------------------------------------------------------------------------------- |
+| Polygon          | [0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E](https://polygonscan.com/address/0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E)|
+| Mumbai           | [0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E](https://mumbai.polygonscan.com/address/0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E)|
 
 ## Set-up
 

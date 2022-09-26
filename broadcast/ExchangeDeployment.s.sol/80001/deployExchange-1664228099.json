@@ -1,7 +1,7 @@
 {
   "transactions": [
     {
-      "hash": "0x4cf5ff4362abb630398f45b0ed26787e7b2524c53c4cc006641764f5f8267609",
+      "hash": null,
       "transactionType": "CREATE",
       "contractName": "CTFExchange",
       "contractAddress": "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E",
@@ -106,9 +106,7 @@
   ],
   "receipts": [],
   "libraries": [],
-  "pending": [
-    "0x4cf5ff4362abb630398f45b0ed26787e7b2524c53c4cc006641764f5f8267609"
-  ],
+  "pending": [],
   "path": "/home/jonathan/WorkSpace/polymarket/ctf-exchange/broadcast/ExchangeDeployment.s.sol/80001/deployExchange-latest.json",
   "returns": {
     "exchange": {
@@ -116,6 +114,6 @@
       "value": "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E"
     }
   },
-  "timestamp": 1664228139,
+  "timestamp": 1664228099,
   "commit": "af3ba7f"
 }
