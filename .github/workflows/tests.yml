@@ -4,7 +4,7 @@ name: test
 
 jobs:
   check:
-    name: Protocol Tests
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

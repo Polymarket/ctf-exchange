@@ -1,5 +1,5 @@
 # Polymarket CTF Exchange
-![Github Actions](https://github.com/Polymarket/ctf-exchange/workflows/tests/badge.svg)
+![Github Actions](https://github.com/Polymarket/ctf-exchange/workflows/Tests/badge.svg)
 
 ## Background
 
