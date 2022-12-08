@@ -8,18 +8,24 @@ The Polymarket CTF Exchange is an exchange protocol that facilitates atomic swap
 It is intended to be used in a hybrid-decentralized exchange model wherein there is an operator that provides offchain matching services while settlement happens on-chain, non-custodially.
 
 
+## Documentation
+
+Docs for the CTF Exchange are available in this repo [here](./docs/Overview.md).
+
 ## Audit
 
-Polymarket engaged Chainsecurity to audit the security of the Polymarket CTF Exchange. The full report is available [here](./audit/ChainSecurity_Polymarket_Governance_and_Exchange_audit_draft-5.pdf).
+Polymarket engaged Chainsecurity to audit the security of the Polymarket CTF Exchange smart contracts. The full report is available [here](./audit/ChainSecurity_Polymarket_Governance_and_Exchange_audit_draft-5.pdf).
 
 
 ## Deployments
+
 | Network          | Address                                                                           |
 | ---------------- | --------------------------------------------------------------------------------- |
 | Polygon          | [0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E](https://polygonscan.com/address/0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E)|
 | Mumbai           | [0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E](https://mumbai.polygonscan.com/address/0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E)|
 
-## Set-up
+
+## Development
 
 Install [Foundry](https://github.com/foundry-rs/foundry/).
 
