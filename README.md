@@ -31,12 +31,6 @@ Install [Foundry](https://github.com/foundry-rs/foundry/).
 
 Foundry has daily updates, run `foundryup` to update `forge` and `cast`.
 
-To install/update forge dependencies: `forge update`
-
-To build contracts: `forge build`
-
-To use prettier-solidity: `pnpm install` (or `npm install` or `yarn install`)
-
 ---
 
 ## Testing
