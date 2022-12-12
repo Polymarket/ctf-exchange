@@ -1,5 +1,15 @@
 # Polymarket CTF Exchange
-[![test](https://github.com/Polymarket/ctf-exchange/actions/workflows/Tests.yml/badge.svg)](https://github.com/Polymarket/ctf-exchange/actions/workflows/Tests.yml)
+
+[![Version][version-badge]][version-link]
+[![License][license-badge]][license-link]
+[![Test][ci-badge]][ci-link]
+
+[version-badge]: https://img.shields.io/github/v/release/polymarket/ctf-exchange.svg?label=version
+[version-link]: https://github.com/Polymarket/ctf-exchange/releases
+[license-badge]: https://img.shields.io/github/license/polymarket/ctf-exchange
+[license-link]: https://github.com/Polymarket/ctf-exchange/blob/main/LICENSE.md
+[ci-badge]: https://github.com/Polymarket/ctf-exchange/actions/workflows/Tests.yml/badge.svg
+[ci-link]: https://github.com/Polymarket/ctf-exchange/actions/workflows/Tests.yml
 
 ## Background
 
