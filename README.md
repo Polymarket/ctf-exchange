@@ -14,7 +14,7 @@ Docs for the CTF Exchange are available in this repo [here](./docs/Overview.md).
 
 ## Audit
 
-Polymarket engaged Chainsecurity to audit the security of the Polymarket CTF Exchange smart contracts. The full report is available [here](./audit/ChainSecurity_Polymarket_Governance_and_Exchange_audit_draft-5.pdf).
+These contracts have been audited and the audit report will be provided shortly.
 
 
 ## Deployments
