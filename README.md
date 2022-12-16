@@ -24,7 +24,7 @@ Docs for the CTF Exchange are available in this repo [here](./docs/Overview.md).
 
 ## Audit
 
-These contracts have been audited and the audit report will be provided shortly.
+These contracts have been audited by Chainsecurity and the report is available [here](./audit/ChainSecurity_Polymarket_Exchange_audit.pdf).
 
 
 ## Deployments
