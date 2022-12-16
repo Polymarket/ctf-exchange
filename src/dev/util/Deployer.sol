@@ -26,13 +26,6 @@ library Deployer {
         }
     }
 
-    function UniswapV3Factory() public returns (address) {
-        // Solenv.config();
-        // bool forkUniswap = vm.std_cheats.envBool("FORK_UNISWAP");
-        bytes memory initcode = Json.readData("artifacts/UniswapV3Factory.json", ".bytecode");
-        return deployBytecode(initcode, "", "");
-    }
-
     function ConditionalTokens() public returns (address) {
         bytes memory initcode = Json.readData("artifacts/ConditionalTokens.json", ".bytecode.object");
         return deployBytecode(initcode, "", "");

@@ -4,10 +4,6 @@ openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/
 solmate/=lib/solmate/src/
 
 common/=src/common/
-ptoken/=src/ptoken/
 creator/=src/creator/
-pool/=src/dev/uniswap/
-mocks/=src/dev/mocks/
 dev/=src/dev/
-gov/=src/gov/
 exchange/=src/exchange/
