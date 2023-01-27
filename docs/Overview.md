@@ -139,7 +139,7 @@ The `CTFExchange` contract facilitates atomic swaps between binary outcome token
 2. Transfer **50** **`A`** from **userA** into `CTFExchange`
 3. Merge **50** token sets into **50** **`C`**(**50** token **`A`** + **50** token **`A'`** = **50** **`C`**)
 4. Transfer **25** **`C`** from `CTFExchange` to **userA**
-5. Transfer **50** **`C`** from `CTFExchange` to **userB**
+5. Transfer **25** **`C`** from `CTFExchange` to **userB**
 
 ## Fees
 
