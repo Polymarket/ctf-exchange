@@ -1,6 +1,6 @@
 # Assets
 
-Stores the addresses of the ERC20 collateral and ERC155 outcome tokens. 
+Stores the addresses of the ERC20 collateral and ERC1155 outcome tokens. 
 
 ## `constructor`
 
