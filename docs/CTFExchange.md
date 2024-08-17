@@ -32,7 +32,7 @@ Allows admin to unpause trading.
 
 Requirements:
 
-caller is `admin` (`onlyAdmin`)
+- caller is `admin` (`onlyAdmin`)
 
 ## `fillOrder`
 
