@@ -39,10 +39,21 @@ OUTPUT="$(forge script ExchangeDeployment \
     --rpc-url $RPC_URL \
     --json \
     --broadcast \
-    --with-gas-price 200000000000 \
     -s "deployExchange(address,address,address,address,address)" $ADMIN $COLLATERAL $CTF $PROXY_FACTORY $SAFE_FACTORY)"
 
 EXCHANGE=$(echo "$OUTPUT" | grep "{" | jq -r .returns.exchange.value)
 echo "Exchange deployed: $EXCHANGE"
+
+echo "Complete!"
+
+sleep 20
+
+ENCODED_ARGS_EXCHANGE=$(cast abi-encode "constructor(address,address,address,address)" $COLLATERAL $CTF $PROXY_FACTORY $SAFE_FACTORY)
+echo "Verifying CTFExchange..."
+forge verify-contract $EXCHANGE src/exchange/CTFExchange.sol:CTFExchange \
+    --constructor-args $ENCODED_ARGS_EXCHANGE \
+    --compiler-version "v0.8.15+commit.e14f2714" \
+    --rpc-url $RPC_URL \
+    -e $ETHERSCAN_API_KEY
 
 echo "Complete!"
