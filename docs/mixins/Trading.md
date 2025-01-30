@@ -6,7 +6,7 @@ Trading implements the core exchange logic for trading CTF assets.
 
 ## `getOrderStatus`
 
-Get the status of an order. An order can either be not-filled, partially filled or fully filled. If an order has not been filled, its hash will not exist in the `orderStatus` mapping. If it has been partially filled its hash will exist in this mapping and the maker amount `remaining` will be defined. If the order has been fully filled the hash will exist and the `isCompleted` bool in the `OrderStatus` object will be `true`
+Get the status of an order. An order can either be not filled, partially filled or fully filled. If an order has not been filled, its hash will not exist in the `orderStatus` mapping. If it has been partially filled its hash will exist in this mapping and the maker amount `remaining` will be defined. If the order has been fully filled the hash will exist and the `isCompleted` bool in the `OrderStatus` object will be `true`
 
 Parameters:
 
@@ -32,12 +32,12 @@ Order order // order to be validated
 
 ## `cancelOrder`
 
-Cancels an order. Calls `_cancelOrder` with the order. An order can only be cancelled by its maker, the address which holds funds for the order.
+Cancels an order. Calls `_cancelOrder` with the order. An order can only be canceled by its maker, the address which holds funds for the order.
 
 Parameters:
 
 ```java
-Order order // order to be cancelled
+Order order // order to be canceled
 ```
 
 ## `cancelOrders`
