@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <0.9.0;
 
-import { PolySafeLib } from "../libraries/PolySafeLib.sol";
+import { SafeLib } from "../libraries/SafeLib.sol";
 import { PolyProxyLib } from "../libraries/PolyProxyLib.sol";
 
 interface IPolyProxyFactory {
@@ -15,7 +15,7 @@ interface IPolySafeFactory {
 abstract contract PolyFactoryHelper {
     /// @notice The Polymarket Proxy Wallet Factory Contract
     address public proxyFactory;
-    /// @notice The Polymarket Gnosis Safe Factory Contract
+    /// @notice The Limitless Safe Factory Contract
     address public safeFactory;
 
     event ProxyFactoryUpdated(address indexed oldProxyFactory, address indexed newProxyFactory);
@@ -43,8 +43,8 @@ abstract contract PolyFactoryHelper {
     }
 
     /// @notice Gets the Safe factory implementation address
-    function getSafeFactoryImplementation() public view returns (address) {
-        return IPolySafeFactory(safeFactory).masterCopy();
+    function getSafeFactoryImplementation() public pure returns (address) {
+        return SafeLib.safeSingletonAddress;
     }
 
     /// @notice Gets the Polymarket proxy wallet address for an address
@@ -53,10 +53,10 @@ abstract contract PolyFactoryHelper {
         return PolyProxyLib.getProxyWalletAddress(_addr, getPolyProxyFactoryImplementation(), proxyFactory);
     }
 
-    /// @notice Gets the Polymarket Gnosis Safe address for an address
+    /// @notice Gets the Limitless Safe 4337 address for an address
     /// @param _addr    - The address that owns the proxy wallet
     function getSafeAddress(address _addr) public view returns (address) {
-        return PolySafeLib.getSafeAddress(_addr, getSafeFactoryImplementation(), safeFactory);
+        return SafeLib.getSafeAddress(_addr, safeFactory);
     }
 
     function _setProxyFactory(address _proxyFactory) internal {

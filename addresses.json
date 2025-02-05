@@ -1,12 +1,12 @@
 {
     "84531": {
-        "ctfExchange": "0x54d696A602343063000B25a51734E3BbE0Ec80a2",
+        "ctfExchange": "0x516989fc9e4694d0c27d2199df0bac5428514df4",
         "rewardDistributor": "0x93A4dB1e2854F01fB3Ff67BcAEAb7c470042CF58",
         "ctf": "0x828Fd8B3544021590bA9F9A994ADDB8B44DDd951",
         "usdc": "0xD7788FfC73C9AE39CE24dfc1098b375792dD42Ac"
     },
     "8453": {
-        "ctfExchange": "0x8B8fb0602c732a1c312e65D9a99Fc4c798d3EDe0",
+        "ctfExchange": "0xeE4d2Ae1C02d71f4E072991cfFDF0CdB80865cF0",
         "rewardDistributor": "0xE895CaE6B705d584b03cd82Fdd57cf7F8c52FaDB",
         "ctf": "0xc9c98965297bc527861c898329ee280632b76e18",
         "usdc": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
