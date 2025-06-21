@@ -14,8 +14,8 @@ Parameters:
 address _collateral // ERC20 collateral asset (USDC)
 address _ctf //  ERC1155 outcome tokens contract (gnosis conditional tokens framework)
 address _proxyFactory // Polymarket proxy factory
-address _safeFactory // Gnosis safe factory contract 
-address _feeReceiver // account to accumulate feed to 
+address _safeFactory // Gnosis Safe factory contract 
+address _feeReceiver // account to accumulate fees to 
 ```
 
 ## `pauseTrading`
@@ -138,8 +138,8 @@ Registers a tokenId, its complement and its conditionId for trading.
 Parameters:
 
 ```java
-uint256 token // The ERC1155 (ctf) tokenId being registered
-uint256 complement // The ERC1155 (ctf) token ID of the complement of token
+uint256 token // The ERC1155 (CTF) tokenId being registered
+uint256 complement // The ERC1155 (CTF) token ID of the complement of token
 bytes32 // The corresponding CTF conditionId
 ```
 Requirements:
