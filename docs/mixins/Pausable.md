@@ -4,7 +4,7 @@ Used to provide a trading "kill switch". Specifically, the primary entry points 
 
 ## `notPaused`
 
-Modifier that reverts in the case that the state variable `paused` is `true` (`bool`). Otherwise, execution of modified function continues without disruption.
+Modifier that reverts in the case that the state variable `paused` is `true` (`bool`). Otherwise, execution of the modified function continues without disruption.
 
 ## `_pauseTrading`
 
