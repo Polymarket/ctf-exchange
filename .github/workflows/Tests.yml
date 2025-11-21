@@ -1,20 +1,44 @@
 name: Tests
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master # Run on push to master branch
+      - develop # Optional: Include development branches
+  pull_request: # CRITICAL: Ensure tests run when a PR is opened/updated
 
 jobs:
   check:
-    name: Tests
+    name: Foundry Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository and Submodules
+        # Use the latest stable version of the checkout action (v4)
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
+          # Ensure recursive checkout for external dependencies (e.g., libraries like OpenZeppelin)
+          submodules: recursive 
 
-      - name: Install Foundry
+      - name: Install Foundry Toolchain
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: nightly
+          # CRITICAL: Lock to a specific stable version (e.g., 1.2.0) 
+          # instead of the unstable 'nightly'. Replace with the project's supported version.
+          version: '1.2.0' 
 
-      - name: Run tests
-        run: forge test -vvv
+      - name: Cache Dependencies
+        # Cache artifacts like compiled contracts, libraries, and external repos (.git) to speed up subsequent runs
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.foundry/cache
+            ./cache
+            ~/.cargo/bin/
+          key: ${{ runner.os }}-${{ hashFiles('foundry.toml') }}-${{ hashFiles('lib/**/foundry.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+            
+      - name: Run Tests
+        # Run standard tests. Use '-vv' (two v's) for typical detailed output on failure.
+        # Use 'forge test' only, unless specific optimization is needed.
+        run: forge test -vv
