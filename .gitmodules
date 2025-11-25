@@ -1,36 +1,72 @@
+# Git Submodules Configuration File (.gitmodules)
+# This file defines external dependencies for a Solidity/Foundry project.
+
+# --- Decentralized Exchange (DEX) / Liquidity Primitives ---
+
 [submodule "lib/uniswap-v3-core"]
 	path = lib/uniswap-v3-core
 	url = https://github.com/Uniswap/v3-core
+# Purpose: Core smart contracts for the Uniswap V3 decentralized exchange.
+
 [submodule "lib/uniswap-v3-periphery"]
 	path = lib/uniswap-v3-periphery
 	url = https://github.com/Uniswap/v3-periphery
-[submodule "lib/forge-std"]
-	path = lib/forge-std
-	url = https://github.com/brockelmore/forge-std
-[submodule "lib/openzeppelin-contracts"]
-	path = lib/openzeppelin-contracts
-	url = https://github.com/openzeppelin/openzeppelin-contracts
-[submodule "lib/solmate"]
-	path = lib/solmate
-	url = https://github.com/transmissions11/solmate
-[submodule "lib/compound-protocol"]
-	path = lib/compound-protocol
-	url = https://github.com/compound-finance/compound-protocol
-[submodule "lib/conditional-tokens-contracts"]
-	path = lib/conditional-tokens-contracts
-	url = https://github.com/gnosis/conditional-tokens-contracts
-[submodule "lib/conditional-tokens-market-makers"]
-	path = lib/conditional-tokens-market-makers
-	url = https://github.com/gnosis/conditional-tokens-market-makers
+# Purpose: Helper contracts (Router, Factory, etc.) that interact with V3 core pools.
+
 [submodule "lib/uniswap-v3-staker"]
 	path = lib/uniswap-v3-staker
 	url = https://github.com/Uniswap/v3-staker
-[submodule "lib/fx-portal"]
-	path = lib/fx-portal
-	url = https://github.com/fx-portal/contracts
-[submodule "lib/solenv"]
-	path = lib/solenv
-	url = https://github.com/memester-xyz/solenv
+# Purpose: Contracts related to staking or incentive distribution on Uniswap V3 positions.
+
+# --- DeFi Lending / Primitives ---
+
+[submodule "lib/compound-protocol"]
+	path = lib/compound-protocol
+	url = https://github.com/compound-finance/compound-protocol
+# Purpose: Core contracts for the Compound lending protocol (often used for testing or integration).
+
+# --- Conditional Market / Prediction Markets ---
+
+[submodule "lib/conditional-tokens-contracts"]
+	path = lib/conditional-tokens-contracts
+	url = https://github.com/gnosis/conditional-tokens-contracts
+# Purpose: Gnosis contracts for creating conditional tokens (prediction market mechanism).
+
+[submodule "lib/conditional-tokens-market-makers"]
+	path = lib/conditional-tokens-market-makers
+	url = https://github.com/gnosis/conditional-tokens-market-makers
+# Purpose: Market maker implementations for Gnosis conditional tokens.
+
+# --- Utility / Standard Libraries (Optimized for Gas/Efficiency) ---
+
+[submodule "lib/forge-std"]
+	path = lib/forge-std
+	url = https://github.com/brockelmore/forge-std
+# Purpose: Essential Foundry standard library with helpers for testing, console logging, and assertions.
+
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts
+# Purpose: Industry-standard base contracts (ERC20, Ownable, etc.) for security and functionality.
+
+[submodule "lib/solmate"]
+	path = lib/solmate
+	url = https://github.com/transmissions11/solmate
+# Purpose: Modern, gas-optimized utility library (minimalist alternatives to OpenZeppelin).
+
 [submodule "lib/solady"]
 	path = lib/solady
 	url = https://github.com/vectorized/solady
+# Purpose: Highly gas-optimized Solidity utility library.
+
+[submodule "lib/solenv"]
+	path = lib/solenv
+	url = https://github.com/memester-xyz/solenv
+# Purpose: Likely a configuration/environment utility library specific to the project.
+
+# --- Cross-Chain / Bridge Primitives ---
+
+[submodule "lib/fx-portal"]
+	path = lib/fx-portal
+	url = https://github.com/fx-portal/contracts
+# Purpose: Contracts for the Fx-Portal bridge, enabling communication between Ethereum and Polygon.
