@@ -1,19 +1,49 @@
-cache/
-out/
-node_modules/
-env/
-tmp/
-broadcast/
-.vscode/
+# --- GENERATED DIRECTORIES AND BUILDS ---
+# Directories for compiled code and temporary files.
 
-buffer
+# Node.js dependencies
+node_modules/
+# Next.js build output
+out/
+# Cache directories
+cache/
+# Generic temporary files
+/tmp/
+# macOS resource files
 .DS_Store
+# Temporary file artifacts, possibly a directory
+buffer/
+
+
+# --- SENSITIVE DATA AND CONFIGURATION ---
+# Environment variables containing secrets or local paths.
 
 .env
 .env.local
 .env.testnet
 .env.mainnet
 
+
+# --- TOOLING AND ENVIRONMENT SPECIFIC ---
+# Configuration for IDEs and environment managers.
+
+# Exclude user-specific VS Code settings and local history/cache.
+# Note: Project-wide settings like settings.json are often deliberately included.
+.vscode/
+
+
+# --- WEB3 / FOUNDRY ARTIFACTS ---
+# Specific rules for excluding Solidity smart contract build/deployment data.
+
+# Exclude the entire broadcast directory first, then selectively re-include.
+/broadcast/
+
+# Re-include the top-level broadcast directory itself so that sub-rules can work.
+# NOTE: The actual broadcast outputs are handled by the exclusion patterns below.
+# This line is often implicitly handled by Git but kept for clarity/compatiblity.
 !/broadcast
+
+# Exclude broadcast artifacts for the local development chain (Chain ID 31337 - Anvil/Hardhat).
 /broadcast/*/31337/
+# Exclude all dry-run simulation outputs from all chains.
 /broadcast/**/dry-run/
