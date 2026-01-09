@@ -1,0 +1,31 @@
+# Local Runbook
+
+This runbook describes how to run and validate the CTF exchange locally.
+
+## Startup order
+
+1. Start required infrastructure (database, message queue, cache).
+2. Run migrations or schema setup if applicable.
+3. Start the exchange service.
+
+## Health verification
+
+- Confirm the main HTTP service responds.
+- Verify database connectivity through logs.
+- Ensure background workers are running.
+
+## Common failure modes
+
+- Port already in use: stop conflicting services or update config.
+- Database connection errors: verify credentials and network.
+- Stale state: clear local volumes or reset the dev database.
+
+## Resetting local state
+
+When things look inconsistent:
+
+- Stop all services.
+- Remove local data volumes.
+- Restart services from a clean state.
+
+Use this runbook as a first-line checklist before deeper debugging.
