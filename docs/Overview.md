@@ -49,7 +49,7 @@ The `CTFExchange` contract facilitates atomic swaps between binary outcome token
 
 #### Match Operation Overview
 
-`matchOrders(makerOrder, [takerOrder], 50, [25])`
+`matchOrders(takerOrder, [makerOrder], 50, [25])`
 
 1. Transfer **50** token **`A`** from **userB** into `CTFExchange`
 2. Transfer **25** **`C`** from **userA** into `CTFExchange`
@@ -90,7 +90,7 @@ The `CTFExchange` contract facilitates atomic swaps between binary outcome token
 
 #### Match Operation Overview
 
-`matchOrders(makerOrder, [takerOrder], 25, 25)`
+`matchOrders(takerOrder, [makerOrder], 25, [25])`
 
 1. Transfer **25** **`C`** from **userB** into `CTFExchange`
 2. Transfer **25** **`C`** from **userA** into `CTFExchange`
@@ -133,7 +133,7 @@ The `CTFExchange` contract facilitates atomic swaps between binary outcome token
 
 #### Match Operation Overview
 
-`matchOrders(makerOrder, [takerOrder], 50, 50)`
+`matchOrders(takerOrder, [makerOrder], 50, [50])`
 
 1. Transfer **50** **`A'`** from **userB** into `CTFExchange`
 2. Transfer **50** **`A`** from **userA** into `CTFExchange`
