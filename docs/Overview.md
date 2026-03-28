@@ -82,7 +82,7 @@ The `CTFExchange` contract facilitates atomic swaps between binary outcome token
 {
   "maker": "userB",
   "makerAsset": "C",
-  "takerAsset": "A''",
+  "takerAsset": "A'",
   "makerAmount": 25,
   "takerAmount": 50
 }
