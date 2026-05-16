@@ -1,32 +1,54 @@
 #!/usr/bin/env bash
 
-LOCAL=.env.local
-TESTNET=.env.testnet
-MAINNET=.env
+# --- ENVIRONMENT CONFIGURATION ---
+# Define the environment file names.
+LOCAL_ENV=".env.local"
+TESTNET_ENV=".env.testnet"
+MAINNET_ENV=".env.mainnet" # Renamed from '.env' for clarity/safety
 
-if [ -z $1 ]
-then
-  echo "usage: deploy_exchange.sh [local || testnet || mainnet]"
-  exit 1
-elif [ $1 == "local" ]
-then
-  ENV=$LOCAL
-elif [ $1 == "testnet" ]
-then
-  ENV=$TESTNET
-elif [ $1 == "mainnet" ]
-then
-  ENV=$MAINNET
-else
-  echo "usage: deploy_exchange.sh [local || testnet || mainnet]"
-  exit 1
+# --- ARGUMENT VALIDATION ---
+if [ -z "$1" ]; then
+    echo "Error: Missing environment argument."
+    echo "Usage: deploy_exchange.sh [local | testnet | mainnet]"
+    exit 1
 fi
 
-source $ENV
+case "$1" in
+    "local")
+        ENV_FILE=$LOCAL_ENV
+        ;;
+    "testnet")
+        ENV_FILE=$TESTNET_ENV
+        ;;
+    "mainnet")
+        ENV_FILE=$MAINNET_ENV
+        ;;
+    *)
+        echo "Error: Invalid environment '$1'."
+        echo "Usage: deploy_exchange.sh [local | testnet | mainnet]"
+        exit 1
+        ;;
+esac
 
-echo "Deploying CTF Exchange..."
+# Check if the environment file exists
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Error: Environment file not found: $ENV_FILE"
+    exit 1
+fi
 
-echo "Deploy args:
+# Load environment variables (RPC_URL, ADMIN, COLLATERAL, etc.).
+# WARNING: Ensure PK (Private Key) is NOT committed to Git.
+source "$ENV_FILE"
+
+# --- DEPLOYMENT PRE-CHECK ---
+if [ -z "$PK" ]; then
+    echo "Error: PK (Private Key) is not set in $ENV_FILE. Aborting for security."
+    exit 1
+fi
+
+echo "--- Deploying CTF Exchange to $1 ---"
+
+echo "Deploy Arguments:
 Admin: $ADMIN
 Collateral: $COLLATERAL
 ConditionalTokensFramework: $CTF
@@ -34,15 +56,40 @@ ProxyFactory: $PROXY_FACTORY
 SafeFactory: $SAFE_FACTORY
 "
 
-OUTPUT="$(forge script ExchangeDeployment \
-    --private-key $PK \
-    --rpc-url $RPC_URL \
+# --- CORE FORGE EXECUTION ---
+
+# Forge script command execution.
+# Using standard gas price retrieval (no --with-gas-price) for robustness.
+# PK is read from the environment variable (sourced above).
+OUTPUT=$(forge script ExchangeDeployment \
+    --private-key "$PK" \
+    --rpc-url "$RPC_URL" \
     --json \
     --broadcast \
-    --with-gas-price 200000000000 \
-    -s "deployExchange(address,address,address,address,address)" $ADMIN $COLLATERAL $CTF $PROXY_FACTORY $SAFE_FACTORY)"
+    -s "deployExchange(address,address,address,address,address)" \
+    "$ADMIN" "$COLLATERAL" "$CTF" "$PROXY_FACTORY" "$SAFE_FACTORY")
 
-EXCHANGE=$(echo "$OUTPUT" | grep "{" | jq -r .returns.exchange.value)
+# Check the exit status of the forge script command
+if [ $? -ne 0 ]; then
+    echo "--- DEPLOYMENT FAILED ---"
+    # Print the full output (including error messages)
+    echo "$OUTPUT"
+    exit 1
+fi
+
+# --- RESULT PARSING ---
+
+# Extract the deployed address using jq from the raw JSON output.
+# Filtering through "grep {" is unnecessary as we expect JSON output.
+EXCHANGE=$(echo "$OUTPUT" | jq -r '.returns.exchange.value')
+
+if [ -z "$EXCHANGE" ]; then
+    echo "Error: Failed to parse deployed exchange address from JSON output."
+    echo "Full Forge Output:"
+    echo "$OUTPUT"
+    exit 1
+fi
+
+echo "--- DEPLOYMENT SUCCESS ---"
 echo "Exchange deployed: $EXCHANGE"
-
-echo "Complete!"
+echo "--- Complete! ---"
