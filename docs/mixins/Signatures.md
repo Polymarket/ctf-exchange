@@ -16,7 +16,7 @@ Parameters:
 
 ```java
 bytes32 orderHash // the has of the order
-Order order // the order which includes the signature
+Order// the order which includes the signature
 ```
 
 ## `isValidSignature`

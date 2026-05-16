@@ -5,7 +5,7 @@ The nonce manager is a mixin responsible for maintaining a mapping of account no
 
 ## `incrementNonce`
 
-Increments (by 1) an account's nonce. `msg.sender` is used to determine the account of which to increment the nonce for. 
+Increments (by 1) an account's nonce. `msg.sender` is used to determine the account for which to increment the nonce. 
 
 ## `updateNonce`
 

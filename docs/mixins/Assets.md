@@ -4,7 +4,7 @@ Stores the addresses of the ERC20 collateral and ERC155 outcome tokens.
 
 ## `constructor`
 
-Initializes the contract, setting the collateral token address and ctf token address state variables. Also approves the ctf contract to spend usdc on the contract's behalf.
+Initializes the contract, setting the collateral token address and ctf token address state variables. Also approves the ctf contract to spend USDC on the contract's behalf.
 
 Parameters:
 
